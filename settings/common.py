@@ -28,6 +28,8 @@ INSTALLED_APPS = (
 
     'multi_tenant_django_application.base',
     'multi_tenant_django_application.users',
+    'multi_tenant_django_application.tenants',
+    'multi_tenant_django_application.employees',
 
     'rest_framework',  # http://www.django-rest-framework.org/
     'rest_framework_swagger',
