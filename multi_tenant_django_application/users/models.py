@@ -30,8 +30,8 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
-    first_name = models.CharField(_('First Name'), max_length=120, blank=True)
-    last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
+    first_name = models.CharField(_('First Name'), max_length=120)
+    last_name = models.CharField(_('Last Name'), max_length=120)
     # https://docs.djangoproject.com/en/1.11/ref/contrib/postgres/fields/#citext-fields
     email = CIEmailField(_('email address'), unique=True, db_index=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
@@ -51,7 +51,7 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
         ordering = ('-date_joined', )
 
     def __str__(self):
-        return str(self.id)
+        return '{} - {}'.format(self.get_full_name(), self.email)
 
     def get_full_name(self) -> str:
         """Returns the first_name plus the last_name, with a space in between.

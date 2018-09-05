@@ -14,7 +14,6 @@ from django.views.generic import TemplateView
 from . import api_urls
 from .base import views as base_views
 from .base.api import schemas as api_schemas
-from .employees import urls as employees_urls
 
 admin.site.site_title = admin.site.site_header = 'Multi Tenant Django Application Administration'
 handler500 = base_views.server_error
@@ -31,9 +30,6 @@ urlpatterns += [
 
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
         base_views.root_txt_files, name='root-txt-files'),
-
-    # Frontend Application
-    url(r'^company/[a-z A-z]*/', include(employees_urls)),
 
     # Rest API
     url(r'^api/', include(api_urls)),
