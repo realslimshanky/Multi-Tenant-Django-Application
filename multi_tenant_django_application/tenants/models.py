@@ -7,7 +7,7 @@ from multi_tenant_django_application.base.models import TimeStampedUUIDModel
 
 class CompanyModel(TimeStampedUUIDModel):
     name = models.CharField(_('Company Name'), max_length=100)
-    admin = models.ForeignKey(User, verbose_name=_('Company Admin'), on_delete=models.SET_NULL, null=True)
+    admin = models.ForeignKey(User, verbose_name=_('Company Admin'), on_delete=models.SET_NULL, null=True, blank=True)
     tenant_aware_suffix = models.CharField(max_length=50, unique=True)
 
     def __str__(self):

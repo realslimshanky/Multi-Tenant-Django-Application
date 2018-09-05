@@ -1,5 +1,6 @@
 # Third Party Stuff
 from django.test import TestCase
+import pytest
 
 # Multi Tenant Django Application Stuff
 from multi_tenant_django_application.users.models import User

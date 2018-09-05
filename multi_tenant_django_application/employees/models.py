@@ -6,12 +6,12 @@ from multi_tenant_django_application.tenants.models import CompanyAwareModel
 
 
 class EmployeeModel(CompanyAwareModel):
-    employee = models.OneToOneField(User, verbose_name=_('Employee'), on_delete=models.SET_NULL, null=True)
+    id = models.OneToOneField(User, verbose_name=_('Employee'), on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
-        return str(self.employee)
+        return str(self.id)
 
     class Meta:
         verbose_name = _('Employee')
         verbose_name_plural = _('Employees')
-        ordering = ('employee', )
+        ordering = ('id', )
