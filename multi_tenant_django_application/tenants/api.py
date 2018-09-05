@@ -8,4 +8,4 @@ from multi_tenant_django_application.tenants.serializers import CompanySerialize
 class CompanyViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = CompanyModel.objects.all()
     serializer_class = CompanySerializer
-    permissions_classes = (IsAdminUser, )
+    permission_classes = (IsAdminUser, )
