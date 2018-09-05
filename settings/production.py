@@ -119,26 +119,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 DATABASES['default'].update(env.db('DATABASE_URL'))  # Should not override all db settings
 
-
-# CACHING
-# ------------------------------------------------------------------------------
-# Note: Specify different redis database name, if same redis instance is used.
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django_redis.cache.RedisCache',
-#         'LOCATION': env('REDIS_URL', default='redis://localhost:6379/0'),
-#         'OPTIONS': {
-#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-#             'PARSER_CLASS': 'redis.connection.HiredisParser',
-#             'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
-#             'CONNECTION_POOL_CLASS_KWARGS': {
-#                 'max_connections': env.int('REDIS_MAX_CONNECTIONS', default=10),
-#                 'timeout': 20,
-#             }
-#         }
-#     }
-# }
-
 # https://docs.djangoproject.com/en/1.10/topics/http/sessions/#using-cached-sessions
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_CACHE_ALIAS = 'default'
@@ -149,8 +129,3 @@ SESSION_CACHE_ALIAS = 'default'
 TEMPLATES[0]['OPTIONS']['loaders'] = [
     ('django.template.loaders.cached.Loader', TEMPLATES[0]['OPTIONS']['loaders']),
 ]
-
-if not API_DEBUG:  # noqa: F405
-    # blocking browsable api for rest framework and allowing just json renderer
-    if 'rest_framework.renderers.BrowsableAPIRenderer' in REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES']:
-        REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].remove('rest_framework.renderers.BrowsableAPIRenderer')
