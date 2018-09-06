@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from multi_tenant_django_application.tenants.models import CompanyModel
+from multi_tenant_django_application.employees.models import EmployeeModel, TeamModel
 
 
-@admin.register(CompanyModel)
-class CompanyAdmin(admin.ModelAdmin):
+@admin.register(EmployeeModel)
+class EmployeeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TeamModel)
+class TeamAdmin(admin.ModelAdmin):
     pass

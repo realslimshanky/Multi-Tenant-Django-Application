@@ -15,3 +15,14 @@ class EmployeeModel(CompanyAwareModel):
         verbose_name = _('Employee')
         verbose_name_plural = _('Employees')
         ordering = ('id', )
+
+
+class TeamModel(CompanyAwareModel):
+    name = models.CharField(_('Team Name'), max_length=20)
+    description = models.TextField(_('Team description'))
+    employees = models.ManyToManyField(EmployeeModel, verbose_name=_('Employees'))
+
+    class Meta:
+        verbose_name = _('Team')
+        verbose_name_plural = _('Teams')
+        ordering = ('name', )
