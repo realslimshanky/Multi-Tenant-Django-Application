@@ -1,8 +1,6 @@
 Multi Tenant Django Application
 ==============================
 
-__Version:__ 0.0.0
-
 A Multi Tenant Django Application. 
 
 ## Getting up and running

@@ -363,3 +363,208 @@ __Response__
 204 No Content
 ```
 
+
+## Display list of all the teams of a company
+```
+GET /api/:tenant_aware_suffix/teams (require admin/id_staff or Company Admin authentication)
+```
+
+__Response__
+```json
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": "856aa35d-1968-43d7-947e-121aae19a78c",
+            "created_at": "2018-09-06T02:12:43.374859+05:30",
+            "modified_at": "2018-09-06T03:48:54.204963+05:30",
+            "name": "The Best Team",
+            "description": "Just the best one in the town",
+            "employees": [
+                "8ce5d8f8-623c-40e0-8a1e-676eb80b09b6"
+            ],
+            "company": "New"
+        },
+        {
+            "id": "85a74a20-b313-4f9d-8553-df54754fe1c8",
+            "created_at": "2018-09-06T03:44:22.332148+05:30",
+            "modified_at": "2018-09-06T03:44:22.332171+05:30",
+            "name": "Top Team",
+            "description": "Just the top team of entire tri state area.",
+            "employees": [],
+            "company": "New"
+        }
+    ]
+}
+```
+
+## Creating a new team
+```
+POST /api/:tenant_aware_suffix/teams (require admin/id_staff or Company Admin authentication)
+```
+
+**Parameters**
+
+Name          | Description
+--------------|-------------------------------------
+name          | Name of the team (max 20 chars)
+description   | Description about the team
+
+__Example__
+```json
+{
+    "name": "HR",
+    "description": "This team works for the benifits of employees."
+}
+```
+
+__Resopnse__
+```json
+{
+    "id": "e6869517-2cae-4adc-a605-79d890c5706f",
+    "created_at": "2018-09-07T05:16:14.296224+05:30",
+    "modified_at": "2018-09-07T05:16:14.296247+05:30",
+    "name": "HR",
+    "description": "This team works for the benifits of employees.",
+    "employees": [],
+    "company": "New"
+}
+```
+
+## Retrieving Team Information
+```
+GET /api/:tenant_aware_suffix/teams/:id (require admin/id_staff or Company Admin authentication)
+```
+
+__Response__
+```json
+{
+    "id": "e6869517-2cae-4adc-a605-79d890c5706f",
+    "created_at": "2018-09-07T05:16:14.296224+05:30",
+    "modified_at": "2018-09-07T05:16:14.296247+05:30",
+    "name": "HR",
+    "description": "This team works for the benifits of employees.",
+    "employees": [],
+    "company": "New"
+}
+```
+
+## Updating Team Information
+```
+PATCH /api/:tenant_aware_suffix/teams/:id (require admin/id_staff or Company Admin authentication)
+```
+
+__Example__
+```json
+{
+    "name": "Human Resources"
+}
+```
+
+__Response__
+```json
+{
+    "id": "e6869517-2cae-4adc-a605-79d890c5706f",
+    "created_at": "2018-09-07T05:16:14.296224+05:30",
+    "modified_at": "2018-09-07T05:20:04.396415+05:30",
+    "name": "Human Resources",
+    "description": "This team works for the benifits of employees.",
+    "employees": [],
+    "company": "New"
+}
+```
+
+## Delete A Team
+
+```
+DELETE /api/:tenant_aware_suffix/teams/:id (require admin/id_staff or Company Admin authentication)
+```
+
+__Response__
+```
+204 No Content
+```
+
+## Listing Employees In A Team
+```
+GET /api/:tenant_aware_suffix/teams/:id/employees (require admin/id_staff or Company Admin authentication)
+```
+
+__Response__
+```json
+{
+    "id": "856aa35d-1968-43d7-947e-121aae19a78c",
+    "name": "The Best Team",
+    "employees": [
+        {
+            "id": "8ce5d8f8-623c-40e0-8a1e-676eb80b09b6",
+            "created_at": "2018-09-06T02:07:56.053719+05:30",
+            "modified_at": "2018-09-06T02:07:56.053741+05:30",
+            "first_name": "Shashank",
+            "last_name": "Kumar",
+            "email": "abc@shanky.xyz",
+            "company": "New"
+        }
+    ]
+}
+```
+
+## Adding Employee To The Team
+```
+PATCH /api/:tenant_aware_suffix/teams/:id/employees/add_employee (require admin/id_staff or Company Admin authentication)
+```
+
+**Parameters**
+
+Name          | Description
+--------------|--------------------------------------------------
+employee      | Employee id of registered Employee of the company
+
+__Example__
+```json
+{
+    "employee": "8ce5d8f8-623c-40e0-8a1e-676eb80b09b6"
+}
+```
+
+__Response__
+```json
+{
+    "id": "856aa35d-1968-43d7-947e-121aae19a78c",
+    "name": "The Best Team",
+    "employees": [
+        {
+            "id": "8ce5d8f8-623c-40e0-8a1e-676eb80b09b6",
+            "created_at": "2018-09-06T02:07:56.053719+05:30",
+            "modified_at": "2018-09-06T02:07:56.053741+05:30",
+            "first_name": "Shashank",
+            "last_name": "Kumar",
+            "email": "abc@shanky.xyz",
+            "company": "New"
+        }
+    ]
+}
+```
+
+## Removing Employee From The Team
+```
+PATCH /api/:tenant_aware_suffix/teams/:id/employees/remove_employee (require admin/id_staff or Company Admin authentication)
+```
+
+__Example__
+```json
+{
+    "employee": "8ce5d8f8-623c-40e0-8a1e-676eb80b09b6"
+}
+```
+
+__Response__
+```json
+{
+    "id": "856aa35d-1968-43d7-947e-121aae19a78c",
+    "name": "The Best Team",
+    "employees": []
+}
+```
